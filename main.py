@@ -17,7 +17,7 @@ bot = commands.Bot(command_prefix=config.PREFIX, intents=intents)
 
 @bot.event
 async def on_ready():
-    print(f"Ready To Work!")
+    print(f"Starting..")
 
 
 for filename in os.listdir("./cogs"):
