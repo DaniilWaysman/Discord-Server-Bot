@@ -8,12 +8,16 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
+def get_prefix(bot, message):
+    config_data = config.load_config()
+    return config_data["PREFIX"]
+
+
 intents = disnake.Intents.all()
 intents.message_content = True
 
 
-bot = commands.Bot(command_prefix=config.PREFIX, intents=intents)
-
+bot = commands.Bot(command_prefix=get_prefix, intents=intents)
 
 @bot.event
 async def on_ready():
