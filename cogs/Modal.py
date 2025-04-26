@@ -91,7 +91,7 @@ class RecruitCommands(commands.Cog):
     
         view = disnake.ui.View(timeout=None)
         view.add_item(RecruitSelect())
-        self.bot.add_view(view=view, message_id=1363324039715754095)
+        self.bot.add_view(view=view, message_id=1363329207685615846)
 
 
 def setup(bot):
