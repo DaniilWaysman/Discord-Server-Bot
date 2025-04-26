@@ -3,6 +3,12 @@ from disnake import Status
 import disnake
 import config
 
+
+def get_prefix(bot, message):
+    config_data = config.load_config()
+    return config_data["PREFIX"]
+
+
 class Settings(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -27,6 +33,7 @@ class Settings(commands.Cog):
         else:
             config_data["PREFIX"] = префикс
             config.save_config(config_data)
+            self.bot.command_prefix = get_prefix
 
             await inter.response.send_message(f"Префикс изменён на `{префикс}`.")
     
