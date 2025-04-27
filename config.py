@@ -11,3 +11,4 @@ def save_config(data):
 config_data = load_config()
 PREFIX = config_data["PREFIX"]
 OWNER_ID = config_data["OWNER_ID"]
+MODERATION_ROLE = config_data["MODERATION_ROLE"]
