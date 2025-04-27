@@ -5,12 +5,12 @@ import os
 class Database:
     def __init__(self, db_path="Database/database.db"):
         self.db_path = db_path
-        self._create_tables()
+        self._create_table()
 
     def _connect(self):
         return sqlite3.connect(self.db_path)
 
-    def _create_tables(self):
+    def _create_table(self):
         with self._connect() as db:
             cursor = db.cursor()
 
@@ -23,17 +23,6 @@ class Database:
                 nickname TEXT NOT NULL,
                 age INTEGER NOT NULL,
                 info TEXT NOT NULL,
-                status TEXT DEFAULT 'Waiting'
-            )
-            """)
-            
-            cursor.execute("""
-            CREATE TABLE IF NOT EXISTS giveaway (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                message_id INTEGER NOT NULL,
-                channel_id INTEGER NOT NULL,
-                user_id INTEGER NOT NULL,
-                winners INTEGER NOT NULL,
                 status TEXT DEFAULT 'Waiting'
             )
             """)
@@ -60,14 +49,3 @@ class Database:
 
             result = cursor.fetchone()
             return result is not None
-
-
-    def add_giveaway(self, message_id: int, channel_id: int, user_id: int, winners: int, status: str = "Waiting"):
-        with self._connect() as db:
-            cursor = db.cursor()
-            
-            cursor.execute("""
-                           INSERT INTO giveaway (message_id, channel_id, user_id, winners, status)
-                           VALUES (?, ?, ?, ?, ?)
-                           """, (message_id, channel_id, user_id, winners, status))
-            db.commit()
